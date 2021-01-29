@@ -1,0 +1,20 @@
+version: "3.6"
+services:
+  goandroid:
+    build: 
+      context: .
+      dockerfile: environment/goandroid/Dockerfile
+      args: 
+        APP_NAME: ${APP_NAME}
+        PORT: ${PORT}
+        TARGET: ${TARGET}
+    ports: 
+      - ${PORT}:${PORT}
+    volumes: 
+      - ./app/src:/go/src/${APP_NAME}
+    env_file: 
+      - .env
+  android_ndk:
+    build: 
+      context: .
+      dockerfile: environment/android-ndk/Dockerfile
